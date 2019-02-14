@@ -1,0 +1,25 @@
+spring:
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      overrideCloudConnectors: true
+      bindings:
+        google_channel:
+          destination: demo
+          #contentType: application/text
+        microsoft_channel:
+          destination: demo
+          #contentType: application/text
+      rabbit:
+        bindings:
+          google_channel:
+            producer:
+              exchangeType: direct
+              routing-key-expression: headers.routingKey
+          microsoft_channel:
+            producer:
+              exchangeType: direct
+              routing-key-expression: headers.routingKey
