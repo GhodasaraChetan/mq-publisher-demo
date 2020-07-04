@@ -5,8 +5,8 @@ import org.springframework.messaging.MessageChannel;
 
 public interface TestChannel {
 
-	String GOOGLE_CHANNEL = "google_channel";
-	String MICROSOFT_CHANNEL = "microsoft_channel";
+	String GOOGLE_CHANNEL = "google-channel";
+	String MICROSOFT_CHANNEL = "microsoft-channel";
 
 	@Output(GOOGLE_CHANNEL)
 	MessageChannel sendMessageToGoogle();

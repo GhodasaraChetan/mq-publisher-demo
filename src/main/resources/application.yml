@@ -3,23 +3,42 @@ spring:
     addresses: localhost:5672
     username: guest
     password: guest
+    publisher-confirms: true
+    publisher-returns: true
   cloud:
     stream:
-      overrideCloudConnectors: true
+      override-cloud-connectors: true
       bindings:
-        google_channel:
+        google-channel:
+          destination: demo
+          producer:
+            error-channel-enabled: true
+          #contentType: application/text
+        microsoft-channel:
           destination: demo
           #contentType: application/text
-        microsoft_channel:
-          destination: demo
-          #contentType: application/text
+        error:
+          destination: myErrors
       rabbit:
         bindings:
-          google_channel:
+          google-channel:
             producer:
-              exchangeType: direct
+              exchange-type: direct
               routing-key-expression: headers.routingKey
-          microsoft_channel:
+          microsoft-channel:
             producer:
-              exchangeType: direct
+              exchange-type: direct
               routing-key-expression: headers.routingKey
+#          error:
+#            producer:
+#              exchangeType: direct
+#              routing-key-expression: headers.routingKey
+
+
+#
+#authentication_failure_close:	true
+#basic.nack:	true
+#connection.blocked:	true
+#consumer_cancel_notify:	true
+#exchange_exchange_bindings:	true
+#publisher_confirms:	true
